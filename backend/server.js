@@ -6,6 +6,10 @@ const bodyParser = require('body-parser');
 mongoose.set('strictQuery', true);
 const app = express();
 
+app.get("/", (req, res) => { 
+    res.send("hellow world")
+})
+
 // run server
 const PORT = process.env.PORT || 5000;
 mongoose
