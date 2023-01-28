@@ -4,18 +4,23 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 mongoose.set('strictQuery', true);
+const userRoutes = require('./routes/userRoutes');
+const {
+  errorHandlerMiddleware,
+} = require('./middlewares/errorHandlerMiddleware');
+
 const app = express();
 
 //Middlewares
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-app.use(bodyParser.json())
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
+//routes middleware
+app.use('/api/users', userRoutes);
 
-//routes
-app.get("/", (req, res) => { 
-    res.send("hellow world")
-})
+//error midleware
+app.use(errorHandlerMiddleware);
 
 // run server
 const PORT = process.env.PORT || 5000;
