@@ -6,6 +6,13 @@ const bodyParser = require('body-parser');
 mongoose.set('strictQuery', true);
 const app = express();
 
+//Middlewares
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.use(bodyParser.json())
+
+
+//routes
 app.get("/", (req, res) => { 
     res.send("hellow world")
 })
