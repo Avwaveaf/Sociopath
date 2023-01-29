@@ -1,6 +1,6 @@
 const expressAsyncHandler = require('express-async-handler');
 const User = require('../models/usersModel');
-const bcrypt = require('bcryptjs');
+
 //registering new user
 const registerUser = expressAsyncHandler(async (req, res) => {
   const { username, email, password } = req.body;
@@ -22,15 +22,11 @@ const registerUser = expressAsyncHandler(async (req, res) => {
     throw new Error('Your email already registered, please Login instead..');
   }
 
-  //enmcyrpting the password
-  const salt = await bcrypt.genSalt(10);
-  const hashedPassword = await bcrypt.hash(password, salt);
-
   // create a new user on the database
   const user = await User.create({
     username,
     email,
-    password: hashedPassword,
+    password,
   });
   if (user) {
     const { _id, username, email, bio, imageUrl } = user;
