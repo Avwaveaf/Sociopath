@@ -25,7 +25,7 @@ const userSchema = mongoose.Schema(
       type: String,
       required: [true, 'Password cannot be empty'],
       minLength: [6, 'Password must be up to 6 characters'],
-      maxLength: [23, 'Password cannot be over 23 characters'],
+  
     },
     imageUrl: {
       type: String,
